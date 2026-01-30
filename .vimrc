@@ -13,11 +13,14 @@ let mapleader = "\\"
 
 highlight ColorColumn ctermbg=darkgray guibg=darkgray
 
-autocmd FileType c setlocal comments=s1:/*,mb:**,elx:*/
+autocmd FileType c,cpp setlocal comments=s1:/*,mb:**,elx:*/
 
-autocmd FileType c setlocal cindent
+autocmd FileType c,cpp setlocal cindent
 
-autocmd FileType c nnoremap <F6> :!norminette %<CR>
+" headers to C++
+autocmd BufNewFile,BufRead *.hpp set filetype=cpp
+" indent to public and private
+set cinoptions+=g0
 
 nnoremap <F5> :set list!<CR>
 
@@ -46,8 +49,9 @@ nnoremap <silent> <leader>nr :NERDTreeRefreshRoot<CR>
 
 " ALE config
 let g:ale_enabled = 1
-let g:ale_linters = {'c': ['gcc']}
+let g:ale_linters = {'c': ['gcc'], 'cpp': ['g++']}
 let g:ale_c_gcc_options = '-Wall -Wextra -Werror -pedantic -Iinclude'
+let g:ale_cpp_gpp_options = '-Wall -Wextra -Werror -std=c++98'
 let g:ale_use_terminal = 0
 
 " Verific
