@@ -50,7 +50,14 @@ nnoremap <silent> <leader>nr :NERDTreeRefreshRoot<CR>
 
 " ALE config
 let g:ale_enabled = 1
-let g:ale_linters = {'c': ['gcc'], 'cpp': ['g++']}
+let g:ale_linters = {
+\ 'c': ['gcc'],
+\ 'cpp': ['g++'],
+\ 'python': ['flake8', 'mypy']
+\}
+
+
+
 let g:ale_c_gcc_options = '-Wall -Wextra -Werror -pedantic -Iinclude'
 let g:ale_cpp_gpp_options = '-Wall -Wextra -Werror -std=c++98'
 let g:ale_use_terminal = 0
