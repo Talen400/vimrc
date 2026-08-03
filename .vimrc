@@ -53,10 +53,23 @@ let g:ale_enabled = 1
 let g:ale_linters = {
 \ 'c': ['gcc'],
 \ 'cpp': ['g++'],
-\ 'python': ['flake8', 'mypy']
+\ 'python': ['flake8', 'mypy'],
+\ 'java': ['javac']
 \}
 
 
+" to java ensures...
+autocmd FileType java call SetJavaSourcepath()
+
+function! SetJavaSourcepath()
+  let l:makefile = findfile('Makefile', expand('%:p:h') . ';')
+  if !empty(l:makefile)
+    let l:root = fnamemodify(l:makefile, ':p:h')
+    let b:ale_java_javac_options = '-sourcepath ' . l:root . ' -d /tmp/ale_java_classes'
+  endif
+endfunction
+
+" Configs of linters for each language
 
 let g:ale_c_gcc_options = '-Wall -Wextra -Werror -pedantic -Iinclude'
 let g:ale_cpp_gpp_options = '-Wall -Wextra -Werror -std=c++98'
